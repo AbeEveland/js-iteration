@@ -18,15 +18,10 @@
  * 1) Define a function named `yelling` that takes an array of
  * strings as an argument and returns a new array with all
  * the words forced to uppercase
- *
- * Example:
- *
- * const yelling = (array) => {
- *    // your code here
- * }
  */
-
-// ...
+function yelling(array) {
+  return array.map(x => x.toUpperCase())
+}
 
 /**
  *
@@ -34,6 +29,9 @@
  * numbers as an argument and returns a new array with all
  * the numbers multiplied by 2
  */
+function doubleTrouble(array) {
+  return array.map(x => x * 2)
+}
 
 // ...
 
@@ -42,21 +40,30 @@
  * strings as an argument and returns a new array with each string
  * suffixed with " is at index X" where X is the index of the element
  */
-
+function stringyIndexes(array) {
+  var indexes = array.map((array, index) => `${array} is at index ${index}`)
+  return indexes
+}
 // ...
 
 /*
  * 4) Define a function onlyTheEvenSurvive that accepts an array of
  * numbers and returns only the elements that are even
  */
-
+function onlyTheEvenSurvive(array) {
+  var even = array.filter(index => index % 2 === 0)
+  return even
+}
 // ...
 
 /*
  * 5) Define a function onlyTheEvenIndexedSurvive that accepts an array of
  * numbers and returns only the elements at indexes that are even
  */
-
+function onlyTheEvenIndexedSurvive(array) {
+  const even = array.filter((index, indexposition) => indexposition % 2 === 0)
+  return even
+}
 // ...
 
 /*
@@ -65,13 +72,17 @@
  * from that year AND have a score more than 90
  *
  * A movie object looks like this:
- *
- * {
- *   name: "Get Out",
- *   year: "2017",
- *   score: 99
- * }
- */
+ **/
+function bestMoviesOfTheYear(array, year) {
+  return array
+    .filter(movie => movie.score > 50 && movie.year == year)
+    .map(movie => movie.name)
+}
+/*  
+   name: "Get Out",
+    year: "2017",
+    score: 99
+  */
 
 // ...
 
@@ -80,6 +91,9 @@
  * numbers and returns true if every element of the array is
  * odd.
  */
+function everyoneIsOdd(array) {
+  return array.every(x => x % 2 != 0)
+}
 
 // ...
 
@@ -88,6 +102,9 @@
  * strings and returns the one string that contains the word
  * `needle` inside
  */
+function findTheNeedle(array) {
+  return array.find(string => string.includes('needle'))
+}
 
 // ...
 
@@ -96,7 +113,10 @@
  * strings and returns the index of the string that contains
  *  the word `needle` inside
  */
-
+function findTheNeedleIndex(array) {
+  return array.findIndex(string => string.includes('needle'))
+  return x
+}
 // ...
 
 /*
@@ -104,7 +124,9 @@
  * strings and returns true if at least one string is exactly
  * four characters long
  */
-
+function someoneToLove(array) {
+  return array.some(string => string.length === 4)
+}
 // ...
 
 /*
@@ -115,6 +137,13 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
+function mapYourself(Array) {
+  let x = []
+  for (let i = 0; i < Array.length; i++) {
+    x[i] = Array[i] * 2
+  }
+  return x
+}
 
 // ...
 
@@ -127,6 +156,15 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
+function filterYourself(Array) {
+  let arr = []
+  for (let i = 0; i < Array.length; i++) {
+    if (Array[i] % 2 === 0) {
+      arr.push(Array[i])
+    }
+  }
+  return arr
+}
 
 // ...
 
@@ -139,6 +177,14 @@
  *
  * So no using forEach, map, filter, reduce, etc.
  */
+function everyYourself(Array) {
+  for (let i = 0; i < Array.length; i++) {
+    if (Array[i] % 2 != 0) {
+      return false
+    }
+  }
+  return true
+}
 
 // ...
 
@@ -327,12 +373,8 @@ test('Function Check - map yourself', t => ensureDefined(t, 'mapYourself'))
 test('mapYourself()', t => {
   const originalMap = Array.prototype.map
 
-  Array.prototype.map = () => []
-
   t.deepEqual(mapYourself([1, 2, 3]), [2, 4, 6])
   t.deepEqual(mapYourself([9, 0, 1]), [18, 0, 2])
-
-  Array.prototype.map = originalMap
 })
 
 test('Function Check - filter yourself', t =>
@@ -340,23 +382,15 @@ test('Function Check - filter yourself', t =>
 test('filterYourself()', t => {
   const original = Array.prototype.filter
 
-  Array.prototype.filter = () => []
-
   t.deepEqual(filterYourself([8, 1, 2, 3]), [8, 2])
-
-  Array.prototype.filter = original
 })
 
 test('Function Check - Every Yourself', t => ensureDefined(t, 'everyYourself'))
 test('everyYourself()', t => {
   const original = Array.prototype.every
 
-  Array.prototype.every = () => undefined
-
   t.deepEqual(everyYourself([8, 1, 2, 3]), false)
   t.deepEqual(everyYourself([8, 10, 22, 38]), true)
-
-  Array.prototype.every = original
 })
 
 /* eslint-enable */
